@@ -6,16 +6,14 @@
 //  Copyright (c) 2015 Kevin Hirsch. All rights reserved.
 //
 
-#if os(iOS)
-
 import UIKit
 
-internal final class KeyboardListener {
+public final class KeyboardListener {
+    
+	public static let sharedInstance: KeyboardListener = KeyboardListener()
 	
-	static let sharedInstance = KeyboardListener()
-	
-	fileprivate(set) var isVisible = false
-	fileprivate(set) var keyboardFrame = CGRect.zero
+	public fileprivate(set) var isVisible = false
+	public fileprivate(set) var keyboardFrame = CGRect.zero
 	fileprivate var isListening = false
 	
 	deinit {
@@ -26,7 +24,7 @@ internal final class KeyboardListener {
 
 //MARK: - Notifications
 
-extension KeyboardListener {
+public extension KeyboardListener {
 	
 	func startListeningToKeyboard() {
 		if isListening {
@@ -66,7 +64,14 @@ extension KeyboardListener {
 	fileprivate func keyboardFrame(fromNotification notification: Notification) -> CGRect {
 		return ((notification as NSNotification).userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue ?? CGRect.zero
 	}
-	
+    
+    #if DEBUG
+    func setKeyboardFrame(with frame: CGRect) {
+        let isUnitTest: Bool = NSClassFromString("XCTest") != nil
+        guard isUnitTest else {
+            fatalError("Don't call this function from outside unit test")
+        }
+        keyboardFrame = frame
+    }
+    #endif
 }
-
-#endif

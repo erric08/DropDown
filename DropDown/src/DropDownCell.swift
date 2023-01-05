@@ -6,18 +6,14 @@
 //  Copyright (c) 2015 Kevin Hirsch. All rights reserved.
 //
 
-#if os(iOS)
-
 import UIKit
 
 open class DropDownCell: UITableViewCell {
 		
 	//UI
-	@IBOutlet open weak var optionLabel: UILabel!
+	@IBOutlet public weak var optionLabel: UILabel!
 	
-	var selectedBackgroundColor: UIColor?
-    var highlightTextColor: UIColor?
-    var normalTextColor: UIColor?
+	public var selectedBackgroundColor: UIColor?
 
 }
 
@@ -49,15 +45,12 @@ extension DropDownCell {
 	
 	override open func setSelected(_ selected: Bool, animated: Bool) {
 		let executeSelection: () -> Void = { [weak self] in
-			guard let `self` = self else { return }
-
-			if let selectedBackgroundColor = self.selectedBackgroundColor {
+            guard let ws = self else { return }
+			if let selectedBackgroundColor = ws.selectedBackgroundColor {
 				if selected {
-					self.backgroundColor = selectedBackgroundColor
-                    self.optionLabel.textColor = self.highlightTextColor
+					ws.backgroundColor = selectedBackgroundColor
 				} else {
-					self.backgroundColor = .clear
-                    self.optionLabel.textColor = self.normalTextColor
+					ws.backgroundColor = .clear
 				}
 			}
 		}
@@ -69,10 +62,6 @@ extension DropDownCell {
 		} else {
 			executeSelection()
 		}
-
-		accessibilityTraits = selected ? .selected : .none
 	}
 	
 }
-
-#endif
