@@ -64,3 +64,5 @@ internal extension UIWindow {
 	}
 	
 }
+
+#endif
