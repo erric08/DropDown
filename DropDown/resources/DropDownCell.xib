@@ -30,7 +30,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="optionLabel" destination="dhL-pA-i6q" id="Y3b-0M-AAL"/>
+                <outlet property="optionLabel" destination="dhL-pA-i6q" id="Rmy-CK-iDv"/>
             </connections>
             <point key="canvasLocation" x="137.59999999999999" y="153.82308845577214"/>
         </view>
